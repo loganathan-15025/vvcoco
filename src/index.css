@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-coconut-green: #2e7d32;
+  --color-coconut-green-light: #4caf50;
+  --color-coconut-green-dark: #1b5e20;
+  --color-coconut-brown: #8d6e63;
+  --color-coconut-brown-light: #a1887f;
+  --color-cream: #f5f0eb;
+  --color-surface: #ffffff;
+  --color-surface-light: #ffffff;
+  --color-dark: #333333;
+  --color-dark-light: #555555;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-tamil: "Noto Sans Tamil", "Nirmala UI", "Latha", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-dark);
+  background-color: var(--color-cream);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body.lang-ta,
+html.lang-ta body {
+  font-family: var(--font-tamil);
+}
+
+body.lang-ta .ta-justify {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 640px) {
+  body.lang-ta .ta-justify {
+    text-align: left;
+  }
+}
+
+html,
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth selection color */
+::selection {
+  background-color: rgba(46, 125, 50, 0.35);
+  color: #ffffff;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* GPU-accelerated ambient animations */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-20px) translateX(8px);
+  }
+}
+
+@keyframes float-slow-reverse {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(15px) translateX(-8px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+.animate-float-slow-reverse {
+  animation: float-slow-reverse 12s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 15s ease-in-out infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
