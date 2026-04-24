@@ -29,7 +29,6 @@ export default function Footer() {
     t("footer.addressLine1"),
     t("footer.addressLine2"),
     t("footer.addressLine3"),
-    t("footer.addressLine4"),
   ].filter(Boolean);
 
   return (

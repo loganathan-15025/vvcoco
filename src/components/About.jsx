@@ -18,6 +18,14 @@ export default function About() {
   const highlights = t("about.highlights");
   const imageXPercent = 50;
   const imageYPercent = 30;
+  const ownerNameShineStyle = {
+    backgroundImage:
+      "linear-gradient(110deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,1) 40%, rgba(255,245,190,1) 50%, rgba(255,255,255,1) 60%, rgba(255,255,255,0.7) 100%)",
+    backgroundSize: "220% 100%",
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+  };
 
   return (
     <section id="about" className="py-16 md:py-24 bg-coconut-brown/10">
@@ -31,6 +39,25 @@ export default function About() {
         >
           {/* Left: Image */}
           <motion.div variants={fadeInLeft} className="relative h-64 lg:h-150">
+            <div className="relative z-20 mx-auto mb-4 w-fit -translate-y-1 rounded-xl bg-linear-to-r from-coconut-green/90 via-coconut-green-light/90 to-coconut-green/90 px-3 py-2 text-center text-white shadow-lg ring-1 ring-white/30 backdrop-blur-sm md:hidden">
+              <p className="text-xs font-bold uppercase tracking-wide text-white/90">
+                {t("about.facilitySubtitle")}
+              </p>
+              <motion.p
+                className="text-base font-extrabold leading-tight"
+                style={ownerNameShineStyle}
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{
+                  duration: 2.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                {t("about.facilityTitle")}
+              </motion.p>
+            </div>
             <motion.div
               className="relative h-full rounded-3xl overflow-hidden ring-1 ring-blue-900/30"
               animate={{
@@ -59,13 +86,24 @@ export default function About() {
                   objectPosition: `${imageXPercent}% ${imageYPercent}%`,
                 }}
               />
-              <div className="absolute left-4 top-1/2 -translate-y-[calc(50%+70px)] rounded-2xl bg-linear-to-r from-coconut-green/90 via-coconut-green-light/90 to-coconut-green/90 px-6 py-3 text-center text-white shadow-xl ring-1 ring-white/30 backdrop-blur-sm">
+              <div className="absolute left-4 top-1/2 hidden -translate-y-[calc(50%+70px)] rounded-2xl bg-linear-to-r from-coconut-green/90 via-coconut-green-light/90 to-coconut-green/90 px-6 py-3 text-center text-white shadow-xl ring-1 ring-white/30 backdrop-blur-sm md:block">
                 <p className="text-sm font-bold uppercase tracking-wider text-white/90">
                   {t("about.facilitySubtitle")}
                 </p>
-                <p className="text-xl md:text-2xl font-extrabold leading-tight">
+                <motion.p
+                  className="text-xl md:text-2xl font-extrabold leading-tight"
+                  style={ownerNameShineStyle}
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 2.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
                   {t("about.facilityTitle")}
-                </p>
+                </motion.p>
               </div>
             </motion.div>
             {/* Decorative elements with delayed fade */}

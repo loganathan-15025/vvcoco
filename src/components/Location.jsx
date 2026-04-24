@@ -20,7 +20,6 @@ export default function Location() {
     t("location.factoryLine1"),
     t("location.factoryLine2"),
     t("location.factoryLine3"),
-    t("location.factoryLine4"),
     t("location.factoryLine5"),
   ].filter(Boolean);
 

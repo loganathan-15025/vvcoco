@@ -33,7 +33,6 @@ export default function Contact() {
     t("contact.addressLine1"),
     t("contact.addressLine2"),
     t("contact.addressLine3"),
-    t("contact.addressLine4"),
     t("contact.addressLine5"),
   ].filter(Boolean);
   const [formData, setFormData] = useState({
