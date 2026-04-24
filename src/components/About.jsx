@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import aboutImage from "../assets/img3.jpg";
 import {
   useScrollAnimation,
   fadeInUp,
@@ -7,7 +8,6 @@ import {
   staggerContainer,
   staggerContainerSlow,
   elasticPop,
-  clipReveal,
 } from "../hooks/useScrollAnimation";
 import { FaCheckCircle } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
@@ -16,6 +16,8 @@ export default function About() {
   const { ref, controls } = useScrollAnimation();
   const { t } = useLanguage();
   const highlights = t("about.highlights");
+  const imageXPercent = 50;
+  const imageYPercent = 30;
 
   return (
     <section id="about" className="py-16 md:py-24 bg-coconut-brown/10">
@@ -25,34 +27,45 @@ export default function About() {
           initial="hidden"
           animate={controls}
           variants={staggerContainer}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start lg:items-stretch"
         >
-          {/* Left: Image with clip-path reveal */}
-          <motion.div variants={fadeInLeft} className="relative">
+          {/* Left: Image */}
+          <motion.div variants={fadeInLeft} className="relative h-64 lg:h-150">
             <motion.div
-              variants={clipReveal}
-              className="relative rounded-2xl overflow-hidden shadow-2xl"
+              className="relative h-full rounded-3xl overflow-hidden ring-1 ring-blue-900/30"
+              animate={{
+                boxShadow: [
+                  "0 0 50px rgba(239, 68, 68, 0.55)", // red
+                  "0 0 50px rgba(251, 146, 60, 0.55)", // orange
+                  "0 0 50px rgba(234, 179, 8, 0.55)", // yellow
+                  "0 0 50px rgba(34, 197, 94, 0.55)", // green
+                  "0 0 50px rgba(59, 130, 246, 0.55)", // blue
+                  "0 0 50px rgba(147, 51, 234, 0.55)", // purple
+                  "0 0 50px rgba(239, 68, 68, 0.55)", // back to red
+                ],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "linear",
+              }}
             >
-              <div className="w-full aspect-[4/3] bg-gradient-to-br from-coconut-green to-coconut-green-light flex items-center justify-center">
-                <div className="text-center text-white p-8">
-                  <motion.div
-                    className="text-6xl mb-4"
-                    animate={{ rotate: [0, 5, -5, 0] }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    🏭
-                  </motion.div>
-                  <p className="text-lg font-semibold">
-                    {t("about.facilityTitle")}
-                  </p>
-                  <p className="text-sm text-white/70 mt-1">
-                    {t("about.facilitySubtitle")}
-                  </p>
-                </div>
+              <img
+                src={aboutImage}
+                alt={t("about.facilityTitle")}
+                className="w-full h-full object-cover"
+                style={{
+                  // Adjust image position without creating blank space in the box.
+                  objectPosition: `${imageXPercent}% ${imageYPercent}%`,
+                }}
+              />
+              <div className="absolute left-4 top-1/2 -translate-y-[calc(50%+70px)] rounded-2xl bg-linear-to-r from-coconut-green/90 via-coconut-green-light/90 to-coconut-green/90 px-6 py-3 text-center text-white shadow-xl ring-1 ring-white/30 backdrop-blur-sm">
+                <p className="text-sm font-bold uppercase tracking-wider text-white/90">
+                  {t("about.facilitySubtitle")}
+                </p>
+                <p className="text-xl md:text-2xl font-extrabold leading-tight">
+                  {t("about.facilityTitle")}
+                </p>
               </div>
             </motion.div>
             {/* Decorative elements with delayed fade */}
@@ -122,13 +135,13 @@ export default function About() {
             </motion.p>
 
             <motion.div variants={staggerContainerSlow} className="space-y-3">
-              {highlights.map((item) => (
+              {highlights.map((item, index) => (
                 <motion.div
-                  key={item}
+                  key={index}
                   variants={elasticPop}
                   className="flex items-start gap-3"
                 >
-                  <FaCheckCircle className="text-coconut-green mt-0.5 flex-shrink-0" />
+                  <FaCheckCircle className="text-coconut-green mt-0.5 shrink-0" />
                   <span className="text-dark-light text-sm">{item}</span>
                 </motion.div>
               ))}

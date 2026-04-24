@@ -29,6 +29,13 @@ const formFieldVariant = {
 export default function Contact() {
   const { ref, controls } = useScrollAnimation();
   const { t } = useLanguage();
+  const contactAddressLines = [
+    t("contact.addressLine1"),
+    t("contact.addressLine2"),
+    t("contact.addressLine3"),
+    t("contact.addressLine4"),
+    t("contact.addressLine5"),
+  ].filter(Boolean);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -108,9 +115,12 @@ export default function Contact() {
                       {t("contact.addressLabel")}
                     </div>
                     <div className="text-dark-light text-sm mt-0.5">
-                      Pollachi, Coimbatore,
-                      <br />
-                      Tamil Nadu, India
+                      {contactAddressLines.map((line, index) => (
+                        <span key={line}>
+                          {line}
+                          {index < contactAddressLines.length - 1 && <br />}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -123,7 +133,7 @@ export default function Contact() {
                       {t("contact.phoneLabel")}
                     </div>
                     <div className="text-dark-light text-sm mt-0.5">
-                      +91 98765 43210
+                      +91 98438 60023
                     </div>
                   </div>
                 </div>
@@ -136,7 +146,7 @@ export default function Contact() {
                       {t("contact.emailLabel")}
                     </div>
                     <div className="text-dark-light text-sm mt-0.5">
-                      info@vvcoco.com
+                      vvcocoproduct@outlook.com
                     </div>
                   </div>
                 </div>
@@ -145,7 +155,7 @@ export default function Contact() {
 
             {/* Quick Action Buttons with hover scale */}
             <motion.a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/919843860023"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02, x: 4 }}
@@ -163,7 +173,7 @@ export default function Contact() {
               </div>
             </motion.a>
             <motion.a
-              href="mailto:info@vvcoco.com"
+              href="mailto:vvcocoproduct@outlook.com"
               whileHover={{ scale: 1.02, x: 4 }}
               whileTap={{ scale: 0.98 }}
               className="flex items-center gap-3 bg-coconut-green hover:bg-coconut-green-dark text-white rounded-2xl p-4 transition-colors"

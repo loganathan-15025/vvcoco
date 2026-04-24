@@ -10,7 +10,7 @@ import { FaLeaf, FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 const socialLinks = [
   { icon: FaFacebook, href: "#", label: "Facebook" },
   { icon: FaInstagram, href: "#", label: "Instagram" },
-  { icon: FaWhatsapp, href: "https://wa.me/919876543210", label: "WhatsApp" },
+  { icon: FaWhatsapp, href: "https://wa.me/919843860023", label: "WhatsApp" },
 ];
 
 const columnVariant = {
@@ -25,6 +25,12 @@ const columnVariant = {
 export default function Footer() {
   const { ref, controls } = useScrollAnimation(0.1);
   const { t } = useLanguage();
+  const footerAddressLines = [
+    t("footer.addressLine1"),
+    t("footer.addressLine2"),
+    t("footer.addressLine3"),
+    t("footer.addressLine4"),
+  ].filter(Boolean);
 
   return (
     <footer className="w-full bg-[#1a1a1a] text-white">
@@ -58,10 +64,11 @@ export default function Footer() {
               {t("footer.contact")}
             </h3>
             <div className="space-y-2.5 text-gray-400 text-sm">
-              <p>Pollachi, Coimbatore</p>
-              <p>Tamil Nadu, India</p>
-              <p>+91 98765 43210</p>
-              <p>info@vvcoco.com</p>
+              {footerAddressLines.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+              <p>+91 98438 60023</p>
+              <p>vvcocoproduct@outlook.com</p>
             </div>
             <div className="flex gap-3 mt-6">
               {socialLinks.map((social) => {

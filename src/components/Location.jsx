@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   useScrollAnimation,
   fadeInUp,
@@ -13,6 +14,18 @@ import { useLanguage } from "../context/LanguageContext";
 export default function Location() {
   const { ref, controls } = useScrollAnimation();
   const { t } = useLanguage();
+  const [zoomLevel, setZoomLevel] = useState(17);
+  const mapEmbedUrl = `https://www.google.com/maps?q=10.6020544,77.0794428&z=${zoomLevel}&output=embed`;
+  const factoryAddressLines = [
+    t("location.factoryLine1"),
+    t("location.factoryLine2"),
+    t("location.factoryLine3"),
+    t("location.factoryLine4"),
+    t("location.factoryLine5"),
+  ].filter(Boolean);
+
+  const zoomIn = () => setZoomLevel((prev) => Math.min(prev + 1, 20));
+  const zoomOut = () => setZoomLevel((prev) => Math.max(prev - 1, 3));
 
   return (
     <section id="location" className="py-24 bg-coconut-brown/10">
@@ -53,11 +66,29 @@ export default function Location() {
           {/* Google Map - clip reveal wipe */}
           <motion.div
             variants={clipReveal}
-            className="lg:col-span-2 rounded-2xl overflow-hidden shadow-lg border-0"
+            className="relative lg:col-span-2 rounded-2xl overflow-hidden shadow-lg border-0"
           >
+            <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={zoomIn}
+                aria-label="Zoom in map"
+                className="w-10 h-10 rounded-xl bg-white/95 text-dark text-xl font-bold shadow-md hover:bg-white transition"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                onClick={zoomOut}
+                aria-label="Zoom out map"
+                className="w-10 h-10 rounded-xl bg-white/95 text-dark text-xl font-bold shadow-md hover:bg-white transition"
+              >
+                -
+              </button>
+            </div>
             <iframe
               title={t("location.mapTitle")}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125323.40713790694!2d76.90035868335938!3d10.660932400000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba83e30e20d4cbf%3A0x43d3ab0ref42b430!2sPollachi%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              src={mapEmbedUrl}
               width="100%"
               height="100%"
               style={{ border: 0, display: "block" }}
@@ -100,13 +131,12 @@ export default function Location() {
                 {t("location.factoryTitle")}
               </h3>
               <p className="text-dark-light text-sm leading-relaxed">
-                {t("location.factoryLine1")}
-                <br />
-                {t("location.factoryLine2")}
-                <br />
-                {t("location.factoryLine3")}
-                <br />
-                {t("location.factoryLine4")}
+                {factoryAddressLines.map((line, index) => (
+                  <span key={line}>
+                    {line}
+                    {index < factoryAddressLines.length - 1 && <br />}
+                  </span>
+                ))}
               </p>
             </motion.div>
             <motion.div
